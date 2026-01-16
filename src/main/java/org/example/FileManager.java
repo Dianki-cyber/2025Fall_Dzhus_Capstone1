@@ -163,7 +163,7 @@ public class FileManager {
 
         for (Transaction t : transactionList) {
 
-            //check that the date falls between Jan 1, the current year to todays date
+            //check that the date falls between Jan 1, the current year to today's date
             if (t.getDate().getYear() == today.getYear()) {
                 t.displayOnScreen();
             }
