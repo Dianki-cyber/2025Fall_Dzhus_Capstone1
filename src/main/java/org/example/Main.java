@@ -1,6 +1,5 @@
 package org.example;
 
-import java.sql.SQLOutput;
 import java.util.InputMismatchException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -39,13 +38,26 @@ public class Main {
                         System.out.println("Type vendor:");
                         String vendor = scanner.nextLine();
 
+                        //NEW: Category input
+                        System.out.println("Enter category (ex. Food, Rent, Income):");
+                        String category = scanner.nextLine().trim();
+                        if (category.isBlank()) category = "Uncategorized";
+
                         //create transaction (deposit) positive
-                        Transaction transaction1 = new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount);
+                        Transaction transaction1 = new Transaction();
+                        transaction1.setDate(LocalDate.now());
+                        transaction1.setTime(LocalTime.now());
+                        transaction1.setDescription(description);
+                        transaction1.setVendor(vendor);
+                        transaction1.setAmount(amount);
+                        transaction1.setCategory(category);
+
                         FileManager.writeTransaction(transaction1);
                         System.out.println("Good Job!");
 
                     } catch (InputMismatchException exception) {
                         System.out.println("Try again");
+                        scanner.nextLine(); // clears bad input
                     }
                     break;
 
@@ -59,19 +71,35 @@ public class Main {
                         System.out.println("Enter vendor:");
                         String vendor1 = scanner.nextLine();
 
+                        //NEW: Category input
+                        System.out.println("Enter category (ex. Food, Rent, Income):");
+                        String category = scanner.nextLine().trim();
+                        if (category.isBlank()) category = "Uncategorized";
+
                         //create new transaction but negative
                         System.out.println("Enter amount:");
                         double amount1 = Double.parseDouble(scanner.nextLine());
                         amount1 = amount1 * -1;
-                        Transaction transaction2 = new Transaction(LocalDate.now(), LocalTime.now(), description1, vendor1, amount1);
+
+                        // UPDATED: use setters (since constructor changed)
+                        Transaction transaction2 = new Transaction();
+                        transaction2.setDate(LocalDate.now());
+                        transaction2.setTime(LocalTime.now());
+                        transaction2.setDescription(description1);
+                        transaction2.setVendor(vendor1);
+                        transaction2.setAmount(amount1);
+                        transaction2.setCategory(category);
+
                         FileManager.writeTransaction(transaction2);
 
                         System.out.println("Successful payment!");
                     } catch (InputMismatchException exception) {
                         System.out.println("Try one more time");
+                        scanner.nextLine();
+                    } catch (NumberFormatException exception) {
+                        System.out.println("Invalid amount. Try again.");
                     }
                     break;
-
 
                 case "L":
                     boolean ledgerPage = true;
@@ -137,9 +165,8 @@ public class Main {
                             }
                         } catch (InputMismatchException exception) {
                             System.out.println("Try again");
-
+                            scanner.nextLine();
                         }
-
                     }
                     break;
 
@@ -148,7 +175,12 @@ public class Main {
                     running = false;
                     break;
 
+                default:
+                    System.out.println("Invalid option. Try again.");
+                    break;
             }
         }
+
+        scanner.close();
     }
 }

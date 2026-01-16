@@ -29,6 +29,13 @@ public class FileManager {
                 if (line.isBlank()) continue;
                 String[] transactionData = line.split("\\|");
 
+                //If old rows onloy have 5 columns, category becomes "Uncategorized"
+                String category = "Uncategorized";
+                if (transactionData.length >= 6) {
+                    category = transactionData[5];
+                    if (category == null || category.isBlank()) category = "Uncategorized";
+                }
+
                 // date= 0 |time=1|description|=2vendor=3|amount=4
                 Transaction newTransaction = new Transaction();
                 DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -40,6 +47,7 @@ public class FileManager {
                 newTransaction.setDescription(transactionData[2]);
                 newTransaction.setVendor(transactionData[3]);
                 newTransaction.setAmount(Double.parseDouble(transactionData[4]));
+                newTransaction.setCategory(category);
 
                 transactionList.add(newTransaction);
             }

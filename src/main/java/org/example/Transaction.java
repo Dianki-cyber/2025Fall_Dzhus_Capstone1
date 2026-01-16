@@ -11,16 +11,19 @@ public class Transaction {
     private String  vendor;
     private double amount;
 
+    private String category;
+
     public Transaction(){
 
     }
 
-    public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount) {
+    public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount, String category) {
         this.date = date;
         this.time = time;
         this.description = description;
         this.vendor = vendor;
         this.amount = amount;
+        this.category = category;
 
     }
 
@@ -64,16 +67,20 @@ public class Transaction {
         this.amount = amount;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+
 
     public void displayOnScreen() {
-        System.out.println(date);
-        System.out.println(time);
-        System.out.println(description);
-        System.out.println(vendor);
-        System.out.println(amount);
-        System.out.println("\n");
-
-
+        System.out.println(date + " | " + time + " | " + description + " | " + vendor + " | " + amount
+                + " | " + (category == null || category.isBlank() ? "Uncategorized" : category));
+        System.out.println();
     }
 
        }
