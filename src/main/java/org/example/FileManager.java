@@ -98,7 +98,6 @@ public class FileManager {
         for (Transaction transaction : transactionList) {
             transaction.displayOnScreen();
         }
-
     }
 
     public static void showAllDeposits() {
