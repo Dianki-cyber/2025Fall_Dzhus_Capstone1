@@ -76,7 +76,6 @@ public class Transaction {
     }
 
 
-
     public void displayOnScreen() {
         System.out.println(date + " | " + time + " | " + description + " | " + vendor + " | " + amount
                 + " | " + (category == null || category.isBlank() ? "Uncategorized" : category));

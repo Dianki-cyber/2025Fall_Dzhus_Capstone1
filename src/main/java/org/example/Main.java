@@ -13,6 +13,7 @@ public class Main {
 
         boolean running = true;
         // Create the menu in while loop
+
         while (running) {
             System.out.println(" === Home Menu === ");
             System.out.println(" D) Add Deposit");
