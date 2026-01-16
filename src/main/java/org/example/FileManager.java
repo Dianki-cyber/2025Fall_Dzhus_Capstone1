@@ -171,7 +171,6 @@ public class FileManager {
 
         boolean found = false;
         String search = vendorSearch.toLowerCase();
-
         for (Transaction transaction : transactionList) {
             if (transaction.getVendor().toLowerCase().contains(search)) {
                 transaction.displayOnScreen();
