@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,33 +80,53 @@ public class FileManager {
         }
     }
 
+
     public static void showAllTransactions() {
         //define an array of <Transaction >
+
         List<Transaction> transactionList = readFile();// function that reads all transaction from transactions.csv
         //make loop for(<NameOfClass> nameOfVariable: nameOfArray)
+
+        /* for (Transaction transaction : transactionList) {
+            transaction.displayOnScreen();
+        }
+        */
+
+        if (transactionList.isEmpty()) {
+            System.out.println("\nNo transactions found.");
+            return;
+        }
+
+        System.out.println("\n========= TRANSACTIONS =========");
         for (Transaction transaction : transactionList) {
             transaction.displayOnScreen();
         }
-
+        System.out.println("================================\n");
     }
 
     public static void showAllDeposits() {
         List<Transaction> transactionList = readFile();
+        System.out.println("\n========= DEPOSITS =========");
+
         for (Transaction transaction : transactionList) {
             if (transaction.getAmount() > 0) {
                 transaction.displayOnScreen();
             }
         }
+        System.out.println("================================\n");
     }
 
     public static void showAllPayments() {
         List<Transaction> transactionList = readFile();
+        System.out.println("\n========= PAYMENTS =========");
+
         for (Transaction transaction : transactionList) {
             if (transaction.getAmount() < 0) {
                 transaction.displayOnScreen();
 
             }
         }
+        System.out.println("===============================\n");
     }
 
     public static void showTransactionsBYMonth(int month) {

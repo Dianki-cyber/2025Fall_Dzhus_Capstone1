@@ -11,6 +11,8 @@ public class Transaction {
     private String  vendor;
     private double amount;
 
+
+
     public Transaction(){
 
     }
@@ -66,17 +68,34 @@ public class Transaction {
 
 
     public void displayOnScreen() {
-        System.out.println(date);
+        System.out.printf("""
+            ------------------------------
+            Date:        %s
+            Time:        %s
+            Description: %s
+            Vendor:      %s
+            Amount:      %.2f
+            """,
+                date,
+                time,
+                description,
+                vendor,
+                amount
+        );
+    }
+
+
+       /* System.out.println(date);
         System.out.println(time);
         System.out.println(description);
         System.out.println(vendor);
         System.out.println(amount);
         System.out.println("\n");
-
+*/
 
     }
 
-       }
+
 
 
 

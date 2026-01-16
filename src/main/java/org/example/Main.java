@@ -15,12 +15,12 @@ public class Main {
         boolean running = true;
         // Create the menu in while loop
         while (running) {
-            System.out.println(" === Home Menu === ");
-            System.out.println(" D) Add Deposit");
+            System.out.println(" ========= Home Menu ========= ");
+            System.out.println("\n D) Add Deposit");
             System.out.println(" P) Make Payment (Debit) ");
             System.out.println(" L) Ledger ");
             System.out.println(" X) Exit ");
-            System.out.println(" Choose the option: ");
+            System.out.println("\n Choose the option: ");
 
             // Create a switch case to handle what they type
             String choice = scanner.nextLine().trim().toUpperCase();
@@ -42,16 +42,16 @@ public class Main {
                         //create transaction (deposit) positive
                         Transaction transaction1 = new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount);
                         FileManager.writeTransaction(transaction1);
-                        System.out.println("Good Job!");
+                        System.out.println("\nGood Job!\n");
 
                     } catch (InputMismatchException exception) {
-                        System.out.println("Try again");
+                        System.out.println("\nTry again");
                     }
                     break;
 
                 case "P":
                     try {
-                        System.out.println("=== Make Payment (Debit)===");
+                        System.out.println("========= Make Payment (Debit)=========");
 
                         System.out.println("Enter description:");
                         String description1 = scanner.nextLine();
@@ -66,9 +66,9 @@ public class Main {
                         Transaction transaction2 = new Transaction(LocalDate.now(), LocalTime.now(), description1, vendor1, amount1);
                         FileManager.writeTransaction(transaction2);
 
-                        System.out.println("Successful payment!");
+                        System.out.println("\nSuccessful payment!");
                     } catch (InputMismatchException exception) {
-                        System.out.println("Try one more time");
+                        System.out.println("\nTry one more time");
                     }
                     break;
 
@@ -78,8 +78,8 @@ public class Main {
 
                     while (ledgerPage) {
                         try {
-                            System.out.println("=== Ledger ===");
-                            System.out.println("A) Display all entries");
+                            System.out.println("========= Ledger =========");
+                            System.out.println("\nA) Display all entries");
                             System.out.println("D) Display deposits");
                             System.out.println("P) Display payments ");
                             System.out.println("R) Reports");
@@ -88,18 +88,21 @@ public class Main {
                             switch (choiceLedger) {
                                 case "A":
                                     // call method that shows all transaction
+                                    System.out.println("\nAccessing Transactions...");
                                     FileManager.showAllTransactions();
                                     break;
                                 case "D":
+                                    System.out.println("\nAccessing Deposits...");
                                     FileManager.showAllDeposits();
                                     break;
                                 case "P":
+                                    System.out.println("\nAccessing Payments...");
                                     FileManager.showAllPayments();
                                     break;
                                 case "R":
                                     boolean reportPage = true;
                                     while (reportPage) {
-                                        System.out.println("=== Reports ===");
+                                        System.out.println("========= Reports =========");
                                         System.out.println("1) Month To Date");
                                         System.out.println("2) Previous Month");
                                         System.out.println("3) Year To Date");
@@ -107,7 +110,7 @@ public class Main {
                                         String reports = scanner.nextLine().trim();
                                         switch (reports) {
                                             case "1":
-                                                System.out.println("Enter month index:");
+                                                System.out.println("\nEnter month index:");
                                                 int monthValue = Integer.parseInt(scanner.nextLine());
 
                                                 //call method that shows all transaction by month
@@ -123,7 +126,7 @@ public class Main {
                                                 reportPage = false;
                                                 break;
                                             default:
-                                                System.out.println("Try again....");
+                                                System.out.println("\nTry again, wrong input....");
                                                 break;
                                         }
                                     }
@@ -133,10 +136,10 @@ public class Main {
                                     break;
 
                                 default:
-                                    System.out.println("invalid option. Choose A, D, P, R, H");
+                                    System.out.println("\ninvalid option. Choose A, D, P, R, H");
                             }
                         } catch (InputMismatchException exception) {
-                            System.out.println("Try again");
+                            System.out.println("\nTry again");
 
                         }
 
