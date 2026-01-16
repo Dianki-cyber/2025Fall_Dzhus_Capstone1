@@ -1,5 +1,6 @@
 package org.example;
 
+import java.sql.SQLOutput;
 import java.util.InputMismatchException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -128,8 +129,11 @@ public class Main {
                                     }
                                     break;
                                 case "H":
-                                    ledgerPage=false;
+                                    ledgerPage = false;
                                     break;
+
+                                default:
+                                    System.out.println("invalid option. Choose A, D, P, R, H");
                             }
                         } catch (InputMismatchException exception) {
                             System.out.println("Try again");
