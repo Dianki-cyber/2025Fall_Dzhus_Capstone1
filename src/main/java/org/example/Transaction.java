@@ -5,15 +5,15 @@ import java.time.LocalTime;
 
 public class Transaction {
 
-    private LocalDate date ;
+    private LocalDate date;
     private LocalTime time;
-    private String  description;
-    private String  vendor;
+    private String description;
+    private String vendor;
     private double amount;
 
     private String category;
 
-    public Transaction(){
+    public Transaction() {
 
     }
 
@@ -82,7 +82,7 @@ public class Transaction {
         System.out.println();
     }
 
-       }
+}
 
 
 
