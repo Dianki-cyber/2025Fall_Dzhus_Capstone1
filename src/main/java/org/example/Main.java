@@ -131,6 +131,7 @@ public class Main {
                                         System.out.println("1) Month To Date");
                                         System.out.println("2) Previous Month");
                                         System.out.println("3) Year To Date");
+                                        System.out.println("4) Search by Vendor");
                                         System.out.println("0) Back");
                                         String reports = scanner.nextLine().trim();
                                         switch (reports) {
@@ -146,6 +147,11 @@ public class Main {
                                                 break;
                                             case "3":
                                                 FileManager.showTransactionsByYearToDate();
+                                                break;
+                                            case "4":
+                                                System.out.println("Enter vendor name:");
+                                                String vendorSearch = scanner.nextLine();
+                                                FileManager.searchByVendor(vendorSearch);
                                                 break;
                                             case "0":
                                                 reportPage = false;

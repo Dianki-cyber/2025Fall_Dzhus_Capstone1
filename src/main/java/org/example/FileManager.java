@@ -29,7 +29,7 @@ public class FileManager {
                 if (line.isBlank()) continue;
                 String[] transactionData = line.split("\\|");
 
-                //If old rows onloy have 5 columns, category becomes "Uncategorized"
+                //If old rows only have 5 columns, category becomes "Uncategorized"
                 String category = "Uncategorized";
                 if (transactionData.length >= 6) {
                     category = transactionData[5];
@@ -78,8 +78,12 @@ public class FileManager {
             writer.write("|");
             writer.write(String.valueOf(transaction.getAmount()));
 
+            // NEW: write category (6th column)
+            String category = transaction.getCategory();
+            if (category == null || category.isBlank()) category = "Uncategorized";
+            writer.write("|");
+            writer.write(category);
 
-            // close the file when you are finished using it
             writer.close();
         } catch (IOException e) {
             System.out.println("ERROR: An unexpected error occurred");
@@ -160,6 +164,24 @@ public class FileManager {
                 transaction.displayOnScreen();
             }
 
+        }
+    }
+
+    public static void searchByVendor(String vendorSearch) {
+        List<Transaction> transactionList = readFile();
+
+        boolean found = false;
+        String search = vendorSearch.toLowerCase();
+
+        for (Transaction transaction : transactionList) {
+            if (transaction.getVendor().toLowerCase().contains(search)) {
+                transaction.displayOnScreen();
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No transactions found for vendor: " + vendorSearch);
         }
     }
 }
